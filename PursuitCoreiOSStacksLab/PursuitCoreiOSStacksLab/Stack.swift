@@ -1,14 +1,14 @@
 import Foundation
 
-class Stack<T> {
+struct Stack<T> {
     
     private var arr = Array<T>()
     
-    func pop() -> T? {
+    mutating func pop() -> T? {
         return arr.popLast()
     }
     
-    func push(element: T) {
+    mutating func push(element: T) {
         arr.append(element)
     }
     
