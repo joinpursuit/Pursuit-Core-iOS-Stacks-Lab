@@ -73,7 +73,7 @@ class PursuitCoreiOSStacksLabTests: XCTestCase {
     func testIsBalanced() {
         XCTAssertTrue(isBalanced(str: "((()))"))
         XCTAssertFalse(isBalanced(str: "((())"))
-        XCTAssertFalse(isBalanced(str: "(()((())()))"))
+        XCTAssertTrue(isBalanced(str: "(()((())()))"))
         XCTAssertTrue(isBalanced(str: "(()((())(())))"))
     }
     

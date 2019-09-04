@@ -6,6 +6,9 @@ import Foundation
 func largest(stack: Stack<Int>) -> Int {
     var newStack = stack
     var largest = Int()
+    if let value = newStack.pop() {
+        largest = value
+    }
     while !newStack.isEmpty() {
         let last = newStack.pop()
         if let last = last {
@@ -113,21 +116,76 @@ func pushBottom<T>(stack: Stack<T>, newElement: T) -> Stack<T> {
 
 //Sample input: (()((())()))
 //Sample output: false
-
-
-func isBalanced(str: String) -> Bool {
+func checkIfPalendrome(str: String) -> Bool {
     var stack = Stack<Character>()
     for a in str {
         stack.push(element: a)
     }
-    let reverseStack = reverse(stack: stack)
-    return equalStacks(stackOne: stack, stackTwo: reverseStack)
+    var reverseStack = reverse(stack: stack)
+    if str.count % 2 != 0 {
+        return false
+    }
+    while !stack.isEmpty() {
+        let first = stack.pop()
+        let last = reverseStack.pop()
+        if first == "(" && last == ")" {
+            continue
+        } else if first == ")" && last == "(" {
+            continue
+        } else {
+            return false
+        }
+    }
+    return true
+}
+
+func isBalanced(str: String) -> Bool {
+    var stack = Stack<Character>()
+    if checkIfPalendrome(str: str) {
+        return true
+    }
+    for a in str {
+        if a == "(" {
+            stack.push(element: a)
+        } else if a == ")" {
+            if stack.isEmpty() {
+                return false
+            } else {
+            let _ = stack.pop()
+            }
+        }
+    }
+    return stack.isEmpty()
 }
 
 //Bonus: Problem Seven:
 //Use a stack to convert a number in decimal to binary
 
 func convertToBinary(_ num: Int) -> String {
-    return ""
+    var num = num
+    var answer = String()
+    var stack = Stack<Character>()
+    while num > 1 {
+        if num % 2 == 1 {
+            stack.push(element: "1")
+            num /= 2
+        } else {
+            stack.push(element: "0")
+            num /= 2
+        }
+    }
+    if num == 1 {
+        stack.push(element: "1")
+    } else if num == 0 {
+        stack.push(element: "0")
+    }
+    while !stack.isEmpty() {
+        let value = stack.pop()
+        if let value = value {
+        answer += "\(value)"
+        }
+    }
+    return answer
 }
+
 
