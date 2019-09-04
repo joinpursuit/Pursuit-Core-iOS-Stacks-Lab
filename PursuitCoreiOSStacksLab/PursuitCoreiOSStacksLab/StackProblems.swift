@@ -144,25 +144,22 @@ func pushBottom<T>(stack: Stack<T>, newElement: T) -> Stack<T> {
 
 func isBalanced(str: String) -> Bool {
     
-    var leftParenStack = Stack<Character>()
-    var rightParenStack = Stack<Character>()
+    var newStack = Stack<Character>()
     
     for char in str{
         if char == "("{
-            leftParenStack.push(element: char)
-        }else{
-            rightParenStack.push(element: char)
+            newStack.push(element: char)
+        }else if char == ")"{
+            if newStack.isEmpty(){
+                return false
+            }
+            let _ = newStack.pop()
         }
+    }    
+    if !newStack.isEmpty(){
+        return false
     }
     
-    while !leftParenStack.isEmpty(){
-        if rightParenStack.isEmpty(){
-            return false
-        }
-        _ = leftParenStack.pop()
-        _ = rightParenStack.pop()
-    }
-
     return true
 }
 
