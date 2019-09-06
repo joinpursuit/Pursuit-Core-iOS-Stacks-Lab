@@ -4,14 +4,28 @@ import Foundation
 //Find the largest integer in a Stack of Ints
 
 func largest(stack: Stack<Int>) -> Int {
-    return 0
+   var stacks = stack
+    var currentVal = 0
+    while !stacks.isEmpty() {
+        let stacking = stacks.pop() ?? 0
+        if currentVal < stacking {
+            currentVal = stacking
+        }
+    }
+    return currentVal
 }
 
 //Problem Two:
 //Find the sum of a Stack of Ints
 
 func sum(stack: Stack<Int>) -> Int {
-    return 0
+    var stacks = stack
+    var sum = 0
+    while !stacks.isEmpty() {
+        let stacking = stacks.pop() ?? 0
+        sum += stacking
+    }
+    return sum
 }
 
 //Problem Three:
@@ -34,7 +48,13 @@ func sum(stack: Stack<Int>) -> Int {
  */
 
 func reverse<T>(stack: Stack<T>) -> Stack<T> {
-    return Stack<T>()
+    var stacks = stack
+    var reverseStack = Stack<T>()
+    while !stacks.isEmpty() {
+        let stacking = stacks.pop()
+        reverseStack.push(element: stacking!)
+    }
+    return reverseStack
 }
 
 
@@ -42,8 +62,17 @@ func reverse<T>(stack: Stack<T>) -> Stack<T> {
 //Determine if two stacks are equal
 
 func equalStacks<T: Equatable>(stackOne: Stack<T>, stackTwo: Stack<T>) -> Bool {
-    return false
+    var stack1 = stackOne
+    var stack2 = stackTwo
+    
+    while !stack1.isEmpty() && !stack2.isEmpty(){
+        if stack1.pop()! != stack2.pop()!{
+            return false
+        }
+    }
+    return true
 }
+
 
 
 //Problem Five:
